@@ -1,4 +1,3 @@
-
 #include "get_next_line.h"
 
 char	*ft_join_and_free(char *text, char *buffer)
