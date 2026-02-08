@@ -5,13 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalbess <aalbess@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 14:28:50 by aalbess           #+#    #+#             */
-/*   Updated: 2026/01/05 13:18:10 by jaldeek          ###   ########.fr       */
+/*   Created: 2026/02/08 13:37:08 by aalbess           #+#    #+#             */
+/*   Updated: 2026/02/08 14:27:41 by aalbess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 static int	words(char const *s, char c)
 {
@@ -49,7 +47,7 @@ static char	*word_dup(char const *s, int start, int end)
 	return (p);
 }
 
-static void	free_split(char **p, int i)
+static void	fre(char **p, int i)
 {
 	while (i--)
 		free(p[i]);
@@ -73,7 +71,7 @@ static int	fill_split(char **p, char const *s, char c)
 				j++;
 			p[i] = word_dup(s, start, j);
 			if (!p[i])
-				return (free_split(p, i), 0);
+				return (fre(p, i), 0);
 			i++;
 		}
 		else

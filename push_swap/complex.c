@@ -3,41 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaldeek <jaldeek@learner.42.tech>          +#+  +:+       +#+        */
+/*   By: aalbess <aalbess@learner.42.tech>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 17:47:22 by jaldeek           #+#    #+#             */
-/*   Updated: 2026/01/21 18:31:54 by jaldeek          ###   ########.fr       */
+/*   Created: 2026/02/08 11:38:59 by aalbess           #+#    #+#             */
+/*   Updated: 2026/02/08 13:50:09 by aalbess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	Complex(t_stack **a,  t_stack **taila, t_stack **b, t_stack **tailb)
-{
-	int	*p;
-	int	bit;
-	int	len;
+#include "push_swap.h"
 
-	bit = 0;
-	len = stack_len(a);
-	p = malloc (len * sizeof(int));
+static int	max_bits(t_stack *a)
+{
+	int		max;
+	int		num_of_bits;
+	t_node	*tmp;
+
+	if (!a)
+		return (0);
+	tmp = a -> head;
+	num_of_bits = 0;
+	max = tmp ->index;
 	while (tmp)
 	{
-		p[i] = tmp ->value;
-		i++;
+		if (tmp ->index > max)
+			max = tmp ->index;
 		tmp = tmp ->next;
 	}
-	sort_p(p);
-	set_index(a, p);
-	while (bit < 9)
-	{
-		while (*a)
-		{
-			if (((*a) -> value >>bit & 1) == 0)
-				pb(a,b);
-			else
-				ra(a, taila);
-		}
-		while (*b)
-			pa(a,b);
-		bit++;
-	}
+	while (1 << num_of_bits <= max)
+		num_of_bits++;
+	return (num_of_bits);
+}
 
+void	complexx(t_stack *a, t_stack *b)
+{
+	int	i;
+	int	j;
+	int	bits;
+
+	bits = max_bits(a);
+	i = 0;
+	while (i < bits)
+	{
+		j = 0;
+		while (j < a -> size)
+		{
+			if ((a -> head-> index >> i & 1) == 0)
+				pb(a, b);
+			else
+				ra(a, 0);
+			j++;
+		}
+		while (b -> size > 0)
+			pa(a, b);
+		i++;
+	}
+}

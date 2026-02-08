@@ -1,107 +1,93 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aalbess <aalbess@learner.42.tech>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/08 13:42:58 by aalbess           #+#    #+#             */
+/*   Updated: 2026/02/08 14:09:34 by aalbess          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	valid2(char **s)
+void	error()
 {
-	if (!s)
-		error();
-	if (match_flag(*s) != -1)
-		return (0);
-	if (!number(s))
-		error();
-	else
+	write(2,"error\n", 6);
+	exit(1);
+}
+
+float compute_disorder(t_stack *a)
+{
+	 t_node *i;
+	 t_node *j;
+	 long mistakes; 
+	 long total_pairs;
+
+	 mistakes = 0;
+	 total_pairs = 0;
+	 i = a -> head;
+	 while (i)
+	 {
+		 j = i ->next;
+		 while (j)
+		 {
+			 total_pairs++;
+			 if(i -> value > j -> value)
+				 mistakes++;
+			 j = j -> next;
+		 }
+		 i = i -> next;
+	 }
+	 if(total_pairs == 0)
+		 return(0);
+	 return((float)mistakes/ (float)total_pairs);
+}
+
+int sorted (t_stack *a)
+{
+	t_node *tmp;
+
+	if(a -> size < 2)
 		return (1);
+	tmp = a->head;
+	while (tmp -> next)
+	{
+		if(tmp ->value > tmp -> next -> value)
+			return(0);
+		tmp = tmp ->next;
+	}
+	return(1);
 }
 
-void	putnbr(int nb)
-{
-	char	c;
-
-	if (nb == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		nb = -nb;
-	}
-	if (nb > 9)
-		putnbr(nb / 10);
-	c = nb % 10 + '0';
-	write(1, &c, 1);
-}
-
-int	ft_atoi(char *str)
-{
-	int	sign;
-	int	res;
-
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	sign = 1;
-	res = 0;
-	while (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		res = res * 10 + (*str - '0');
-		str++;
-	}
-	return (res * sign);
-}
-
-int	number(char** s)
+int number(char* s)
 {
 	int	i;
-	int j;
 
 	i = 0;
+	if (s[i] == '-' || s[i] == '+')
+		i++;
 	while (s[i])
 	{
-		j = 0;
-		while (s[i][j] && s[i])
-		{
-			if (j == 0 && (s[i][j] == '-' || s[i][j] == '+'))
-				j++;
-			if (!(s[i][j] >= '0' && s[i][j] <= '9'))
-				return (0);
-			j++;
-		}
+		if (!(s[i] >= '0' && s[i] <= '9'))
+			return(0);
 		i++;
 	}
 	return (1);
 }
 
-int	*valid(char **s)
+int has_dup(long num, t_stack* a)
 {
-	int	*res;
-	int	len;
-	int	i;
-	int	j;
+	t_node* tmp;
 
-	if (valid2(s) == 0)
-		return (NULL);
-	i = 0;
-	len = length(s);
-	res = malloc(sizeof(int) * len);
-	if (!res)
-		return (NULL);
-	len = 0;
-	while (s[i])
+	tmp = a->head;
+	while (tmp)
 	{
-		j = 0;
-		while (s[i][j])
-		{
-			res[len] = ft_atoi(s[i][j++]);
-			if (res[len] > INT_MAX || res[len++] < INT_MIN)
-				error();
-		}
-		i++;
+		if (tmp->value == num)
+			return (1);
+		tmp = tmp->next;
+
 	}
-	return (res);
-}
+	return (0);
+} 
