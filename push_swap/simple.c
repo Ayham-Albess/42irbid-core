@@ -11,54 +11,62 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-
-/*
-void simple(t_stack *a, t_stack *b)
+int	get_min(t_stack *s)
 {
-	int i;
+	t_node *temp;
+	int		min;
 
-	i = 0;
-	while (i < a->size)
+	temp = s -> head;
+	min = temp->value;
+	while (temp)
 	{
-		if(a->head ->index == i)
-		{
-			pb(a,b);
-			i++;
-		}
-		else 
-			ra(a,0);
+		if (temp->value < min)
+			min = temp->value;
+		temp = temp->next;
 	}
-
-	while (b ->head)
-		pa(a,b);
+	return (min);
 }
-	
-	
-	{
-	int rotate;
 
-	if (b->size == 0)
-	{
-		pb(a, b);
-		pb(a,b);
-	}
-	if(b ->head ->value < b ->head ->next ->value)
-		sb(a,b,0);
-	while (a-> head)
-	{
-		rotate = 0;
-		while (a ->head ->value < b ->head->value && rotate != b->size)
-		{
-			rotate++;
-			rb(a,b,0);
-		}
-		pb(a,b);
-		while (rotate> 0)
-		{
-			rrb(a,b,0);
-			rotate--;
-		}
-	}
+int	get_pos(t_stack *s, int val)
+{
+	t_node	*temp;
+	int		pos;
 
+	temp = s -> head;
+	pos = 0;
+	while (temp)
+	{
+		if (temp->value == val)
+			break ;
+		pos++;
+		temp = temp->next;
+	}
+	return (pos);
 }
-*/
+
+void	simple(t_stack *a, t_stack *b)
+{
+	int	min;
+	int	pos;
+	int	size;
+
+	size = a -> size;
+	while (size > 1)
+	{
+		min = get_min(a);
+		pos = get_pos(a, min);
+		if (pos == 1)
+			sa(a, 0);
+		else if (pos <= size / 2)
+			while (a->head->value != min)
+				ra(a, 0);
+		else
+			while (a ->head->value != min)
+				rra(a, 0);
+		if (size > 2)
+			pb(a, b);
+		size--;
+	}
+	while (b -> head)
+		pa(a, b);
+}
