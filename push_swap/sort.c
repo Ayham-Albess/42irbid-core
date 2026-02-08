@@ -20,9 +20,9 @@ void	sort(t_stack *a, t_stack *b, t_algo *algo)
 
 	if (algo->strategy == SIMPLE)
 		simple(a, b);
-	if(algo->strategy == MEDIUM)
+	else if(algo->strategy == MEDIUM)
 		medium(a, b);
-	if(algo -> strategy== COMPLEX)
+	else if(algo -> strategy== COMPLEX)
 		complexx(a, b);
 	else 
 	{
@@ -33,7 +33,6 @@ void	sort(t_stack *a, t_stack *b, t_algo *algo)
 		else 
 			complexx(a, b);
 	}
-
 	if (algo->bench == 1)
 		print_bench(a, algo, disorder);
 }

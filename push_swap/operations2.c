@@ -32,35 +32,7 @@ void ra(t_stack *a, int c)
 		write(1, "ra\n", 3);
 	}
 }
-void rb(t_stack *a, t_stack *b, int c)
-{
-    t_node *old_head;
 
-    if (!b || b->size < 2)
-        return;
-
-    old_head = b->head;
-
-    // Move head forward
-    b->head = old_head->next;
-    b->head->prev = NULL;
-
-    // Put old head at the end
-    b->tail->next = old_head;
-    old_head->prev = b->tail;
-
-    old_head->next = NULL;
-    b->tail = old_head;
-
-    if (c == 0)
-    {
-        a->bench->counts[OP_RB]++;
-        a->bench->counts[TOTAL_OP]++;
-        write(1, "rb\n", 3);
-    }
-}
-
-/*
 void rb(t_stack *a, t_stack *b, int c)
 {
 	t_node *tmp;
@@ -80,7 +52,8 @@ void rb(t_stack *a, t_stack *b, int c)
 		a->bench->counts[TOTAL_OP]++;
 		write(1, "rb\n", 3);
 	}
-}*/
+}
+
 void rr(t_stack *a, t_stack *b)
 {
 	ra(a, 1);
