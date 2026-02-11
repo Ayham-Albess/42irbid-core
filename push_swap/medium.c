@@ -50,6 +50,8 @@ static void	push_to_b(t_stack *a, t_stack *b, int window)
 
 static void	push_back(t_stack *a, t_stack *b)
 {
+	simple(b, a);
+	/*
 	int 	rotate;
 
 	pa(a, b);
@@ -68,6 +70,7 @@ static void	push_back(t_stack *a, t_stack *b)
 		while (rotate-- > 0)
 			rra(a, 0);
 	}
+	*/
 }
 
 void	medium(t_stack *a, t_stack *b)
