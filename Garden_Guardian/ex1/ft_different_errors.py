@@ -18,6 +18,7 @@ def garden_operations():
         print("Testing FileNotFoundError...")
         f = open("texrt.txt")
         f = f - "a"
+        f.close()
     except FileNotFoundError:
         print("Caught FileNotFoundError: No such file ’texrt.txt’\n")
     try:
