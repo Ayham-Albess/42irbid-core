@@ -1,18 +1,32 @@
 if __name__ == "__main__":
     print("=== Achievement Tracker System ===\n")
-    set1 = {"first_kill", "level_10", "treasure_hunter", "speed_demon"}
-    set2 = {"first_kill", "level_10", "boss_slayer", "collector"}
-    set3 = {"level_10", "treasure_hunter", "boss_slayer",
-            "speed_demon", "perfectionist"}
-    print(f"Player alice achievements:  {set1}")
-    print(f"Player bob achievements:  {set2}")
-    print(f"Player charlie achievements:  {set3}")
-    print("\n=== Achievement Analytics ===")
-    print(f"All unique achievements:  {set1 | set2 | set3}")
-    print(f"Total unique achievements:  {len(set1 | set2 | set3)}\n")
-    print(f"Common to all players:  {set1 & set2 & set3}")
-    rare = set1 - (set2 | set3) | set2 - (set1 | set3) | set3 - (set1 | set2)
-    print(f"Rare achievements (1 player):  {rare}\n")
-    print(f"Alice vs Bob common:  {set1 & set2}")
-    print(f"Alice unique:  {set1 - set2}")
-    print(f"Bob unique:  {set2 - set1}")
+    all_dic = {"Strategist", "Speed Runner", "Survivor",
+               "Master Explorer", "Treasure Hunter", "First Steps",
+               "Collector Supreme", "Untouchable", "Sharp Mind",
+               "Crafting Genius", "World Savior",
+               "Hidden Path Finder", "Untouchable",
+               "Boss Slayer"}
+    set1 = {"Crafting Genius", "World Savior", "Master Explorer",
+            "Collector Supreme", "Untouchable", "Boss Slayer"}
+    set2 = {"Crafting Genius", "Strategist", "World Savior",
+            "Master Explorer", "Unstoppable",
+            "Collector Supreme", "Untouchable"}
+    set3 = {"Strategist", "Speed Runner", "Survivor",
+            "Master Explorer", "Treasure Hunter", "First Steps",
+            "Collector Supreme", "Untouchable", "Sharp Mind"}
+    set4 = {"Strategist", "Speed Runner", "Unstoppable",
+            "Untouchable", "Boss Slayer"}
+    print(f"Player alice:  {set1}")
+    print(f"Player bob:  {set2}")
+    print(f"Player charlie:  {set3}")
+    print(f"Player Dylan:  {set4}\n")
+    print(f"All distinct achievements:  {set1 | set2 | set3 | set4}")
+    print(f"\nCommon achievements:  {set1 & set2 & set3 & set4}\n")
+    print(f"Only Alice has:  {set1 - (set2 | set3 | set4)}")
+    print(f"Only Bob has:  {set2 - (set1 | set3 | set4)}")
+    print(f"Only Charlie has:  {set3 - (set2 | set1 | set4)}")
+    print(f"Only Dylan has:  {set4 - (set2 | set3 | set1)}\n")
+    print(f"Alice is missing:  {all_dic - set1}")
+    print(f"Bob is missing:  {all_dic - set2}")
+    print(f"Charlie is missing:  {all_dic - set3}")
+    print(f"Dylan is missing:  {all_dic - set4}")
