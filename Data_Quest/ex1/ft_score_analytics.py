@@ -18,12 +18,14 @@ if __name__ == "__main__":
         arr = []
         bb = []
         index = 1
-        for i in range(1, len(sys.argv)):
+        i = 1
+        while i < len(sys.argv):
             if hh(sys.argv[i]):
                 arr += [int(sys.argv[i])]
             else:
                 bb += [i]
             index += 1
+            i += 1
         if not (bb == []):
             for i in bb:
                 print(f"Invalid parameter: '{sys.argv[i]}'")

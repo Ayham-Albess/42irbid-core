@@ -12,7 +12,7 @@ if __name__ == "__main__":
     print(f"New list of capitalized names only:  {l2}\n")
     dic = {name: random.randrange(1, 1000) for name in l1}
     print(f"Score dict:  {dic}")
-    avg = 0
+    avg = 0.0
     for key in dic:
         avg += dic[key]
     avg = avg / len(dic)
