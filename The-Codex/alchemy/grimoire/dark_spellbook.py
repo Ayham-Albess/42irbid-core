@@ -6,5 +6,6 @@ def dark_spell_allowed_ingredients() -> list[str]:
 
 
 def dark_spell_record(spell_name: str, ingredients: str) -> str:
+    print("gggggggggggggg")
     result = validate_ingredients(ingredients)
     return f"Dark spell recorded: {spell_name} ({result})"
